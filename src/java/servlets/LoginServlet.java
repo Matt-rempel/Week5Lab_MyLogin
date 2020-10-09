@@ -29,12 +29,18 @@ public class LoginServlet extends HttpServlet {
         
         String logout = request.getParameter("logout");
         
+        HttpSession session = request.getSession();
+            
         if (logout != null) {
-            HttpSession session = request.getSession();
             session.removeAttribute("user");
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        if (session.getAttribute("user") != null) {
+            response.sendRedirect("home");
+        } else {
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        }
+        
 
     }
 
@@ -51,10 +57,23 @@ public class LoginServlet extends HttpServlet {
                 HttpSession session = request.getSession();
                 session.setAttribute("user", user);
                 response.sendRedirect("home");
+            } else {      
+                request.setAttribute("username", username);
+                request.setAttribute("password", password);
+                request.setAttribute("message", "User not found");
+                
+                getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
             }
+        } else {      
+            request.setAttribute("username", username);
+            request.setAttribute("password", password);
+            request.setAttribute("message", "Invalid credentials");
+            
+            getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
         }
         
-        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
         
     }
 

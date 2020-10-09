@@ -14,12 +14,13 @@
     <body>
         <h1>Login Page</h1>
         <form action="login" method="POST">
-            Username: <input type="text" name="username" />
+            Username: <input type="text" name="username" value="${username}" />
             <br>
-            Password: <input type="password" name="password" />
+            Password: <input type="password" name="password" value="${password}" />
             <br>
             <input type="submit" value="submit" />
         </form>
-        <p>Invalid Login</p>
+        <p>${message}</p>
+       
     </body>
 </html>
