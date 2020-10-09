@@ -23,10 +23,12 @@ public class AccountService {
     public User login(String username, String password) {
        User user = new User(username, password);
        
-       if (user.equals(this.abe) || user.equals(this.barb)) {
+       if ((this.barb.getUsername().equals(user.getUsername()) || this.abe.getUsername().equals(user.getUsername())) && password.equals("password")) {
+           user.setPassNull();
            return user;
        }
        
        return null;
     }
+   
 }

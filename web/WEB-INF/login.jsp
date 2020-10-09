@@ -13,10 +13,13 @@
     </head>
     <body>
         <h1>Login Page</h1>
-        <form action="/login" method="POST">
+        <form action="login" method="POST">
             Username: <input type="text" name="username" />
+            <br>
             Password: <input type="password" name="password" />
+            <br>
             <input type="submit" value="submit" />
         </form>
+        <p>Invalid Login</p>
     </body>
 </html>

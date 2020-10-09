@@ -26,7 +26,16 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        
+        String logout = request.getParameter("logout");
+        
+        if (logout != null) {
+            HttpSession session = request.getSession();
+            session.removeAttribute("user");
+        }
+        
         getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+
     }
 
 
@@ -43,8 +52,10 @@ public class LoginServlet extends HttpServlet {
                 session.setAttribute("user", user);
                 response.sendRedirect("home");
             }
-            
         }
+        
+        getServletContext().getRequestDispatcher("/WEB-INF/login.jsp").forward(request, response);
+        
     }
 
 }
